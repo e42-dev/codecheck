@@ -1,0 +1,346 @@
+@import url("horstmann_common.css");
+
+html, body { /* TODO Edgcomb 2022-08-01 */
+  height: auto;
+}
+
+.hc-element {
+  height: auto;
+}
+
+.codecheck_tracer .hc-code, .codecheck_tracer pre, .codecheck_tracer code {
+    font-family:"DejaVuSansMonoSemiCondensed", "Courier New", monospace;
+    font-size: 86.46297%; /* (472/1000) / (1118/2048) */
+    word-wrap: break-word; 
+}
+
+.codecheck_tracer .arenaContainer {
+    /* width: 100%; TODO Edgcomb 2022-08-01 */
+    margin: 2em;
+    cursor: pointer;
+    user-select: none;
+    -moz-user-select: none;      /* Firefox */
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none;   /* Safari */
+    -ms-user-select: none;       /* Internet Explorer/Edge */    
+}
+
+.codecheck_tracer .arenaContainer table {
+    font-size: inherit; /* Otherwise a browser style sheet rule sets this, which interferes with zooming */
+}
+
+.codecheck_tracer .arenaContainer > :first-child {
+    width: 100%;
+}
+
+.codecheck_tracer .codelines {
+   display: inline-block;
+   vertical-align: top;
+   counter-reset: line;
+}
+
+.codecheck_tracer .codelines > span {
+    margin-left: 2em;
+    display: block;
+    white-space: pre;
+    counter-increment: line;
+}
+
+.codecheck_tracer .codelines > span:before {
+  content: counter(line);
+  display: inline-block;
+  padding-right: 2em;
+  color: #444;
+  text-align: right;
+  min-width: 3em;
+  font-size: 0.7em;
+}
+
+
+.codecheck_tracer .codelines > span:focus, .codecheck_tracer th:focus, .codecheck_tracer span:focus, .codecheck_tracer table:focus, .horstmann_rearrange .tile:focus, .multiple-choice > li:focus {
+    /* border: solid 0.2em #c0c0c0; */
+}
+
+.codecheck_tracer .codelines .selected-line {
+    background: #ffe06a;
+}
+
+.codecheck_tracer .codelines .hc-good {
+  background-color: #63B147;
+}
+
+.codecheck_tracer .codelines .hc-bad {
+  background-color: #F4D3DD;
+}
+
+/* TODO: Clean out trace table */
+
+.codecheck_tracer .tracetable table {
+   display: inline-block;
+   vertical-align: top;
+   margin-top: 0;
+}
+
+.codecheck_tracer .tracetable th, .codecheck_tracer .tracetable td {
+    font-weight:normal;
+    text-align:center;
+    vertical-align: baseline;
+    padding: 0.2em;
+    cursor: pointer;
+}
+
+.codecheck_tracer .tracetable th {
+    background: #F3F3F4;
+    color: #0054a8;
+    min-width: 3em;
+}
+
+.codecheck_tracer .tracetable th, .codecheck_tracer .tracetable td {
+    font-size: 111%;
+}
+
+.codecheck_tracer .tracetable td {
+    background: #E9EDF7;
+    color: #2E4D79;
+}
+
+.codecheck_tracer .tracetable td:empty:after{
+  content: "\00a0";
+} 
+
+.codecheck_tracer .tracetable .old-value {
+    text-decoration: line-through;
+}
+
+.codecheck_tracer .tracetable .selected-line::before {
+    content: url("../images/paper_clip.png");
+    position: absolute;
+    transform: translate(-120%, 0%);    
+}
+
+.codecheck_tracer .tracetable tr.hc-bad::after {
+    content: url("../images/cross.png");
+    vertical-align: baseline;
+}
+
+.codecheck_tracer .tracetable tr.hc-good::after {
+    content: url("../images/tick.png");
+    vertical-align: baseline;
+}
+
+.codecheck_tracer .codelisting .hc-good::before {
+    content: url("../images/small-tick.png");
+    position: absolute;
+    transform: translate(-120%, 0%);
+}
+
+.codecheck_tracer .codelisting > pre > .hc-bad::before {
+    content: url("../images/small-cross.png");
+    position: absolute;
+    transform: translate(-120%, 0%);
+}
+
+.codecheck_tracer .tracetable th.hc-good::after {
+    content: url("../images/tick.png");
+    vertical-align: baseline;
+}
+
+.codecheck_tracer .tracetable th.hc-bad::after {
+    content: url("../images/cross.png");
+    vertical-align: baseline;
+}
+
+/* To work around a bug in Safari. Unfortunately, the workaround doesn't work either */
+.codecheck_tracer .selected-line:focus::before, .codecheck_tracer .code-table > pre > .hc-good:focus::before, .codecheck_tracer .code-table > pre > .hc-bad:focus::before {
+    outline: none; 
+}
+
+/* Objects, arrays, frames */
+
+.codecheck_tracer .frame,
+.codecheck_tracer .object,
+.codecheck_tracer .array {
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  hyphens: none;
+  -webkit-hyphens: none;
+  margin-right: 0.75em;
+}
+
+/* Names and values */
+
+.codecheck_tracer .name {
+  padding-top: 0.1em;
+  padding-bottom: 0.1em;
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+  padding-left: 0.75em;
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  min-height: 1.5em;
+}
+
+.codecheck_tracer .array > .name {
+  font-size: 70%;
+}
+
+.codecheck_tracer .frame > .name:after,
+.codecheck_tracer .object > .name:after {
+  padding-left: 0.25em;
+  content: "=";
+}
+
+.codecheck_tracer .value {
+  padding-top: 0.1em;
+  padding-bottom: 0.1em;
+  padding-left: .75em;
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+  justify-self: start;
+}
+
+.codecheck_tracer .value > span {
+  display: inline-block;
+  background: white;
+  padding: 0.1em;
+  min-width: 4em;
+  text-align: center;
+  margin-right: 0.75em;         
+}
+
+.codecheck_tracer .fat {
+  align-self: start;
+}
+
+.codecheck_tracer .title {
+  border-bottom: thin solid white;
+  grid-column: span 2;
+  text-decoration: underline;
+  font-size: 110%;
+  text-align: center;
+  margin: 0em;
+  padding: 0.4em;
+}
+
+.codecheck_tracer .history {
+  text-decoration: line-through;
+  color: lightgray;
+  margin-right: 0.5em;
+}
+
+/* Seq */
+
+.codecheck_tracer .seq {
+  margin: 0.1em;
+}
+
+.codecheck_tracer .seq > tr > td {
+    text-align: center;
+    margin: 0.1em;
+    min-width: 1.5em;
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+    border-style: none;
+    background-color: #80d4ce; 
+}
+
+/* Colors */
+
+.codecheck_tracer .object.heap,
+.codecheck_tracer .array.heap {
+  background: #DF8489;
+}
+
+.codecheck_tracer .struct {
+  background: #FBBC86;
+  border: medium solid white;
+}
+
+.codecheck_tracer .frame > .name,
+.codecheck_tracer .frame > .value {
+  background: #FFEFA9;
+}
+
+.codecheck_tracer .seq > tr > td {
+  background-color: #80d4ce;
+}
+
+
+/* Round corners */
+
+.codecheck_tracer .object,
+.codecheck_tracer .array {
+  border-top-left-radius: 0.75em;
+  border-bottom-left-radius: 0.75em;                  
+  border-top-right-radius: 0.75em;
+  border-bottom-right-radius: 0.75em;
+}
+
+.codecheck_tracer .frame > .name {
+  border-top-left-radius: 0.75em;
+  border-bottom-left-radius: 0.75em;         
+}
+
+.codecheck_tracer .frame > .value {
+  border-top-right-radius: 0.75em;
+  border-bottom-right-radius: 0.75em;
+}
+
+.codecheck_tracer .fat {
+  border-bottom-left-radius: 0.75em;
+}
+
+/* Focus */
+
+.codecheck_tracer span.pointerStart {
+    background-color: blue;
+}
+
+.codecheck_tracer :focus {
+  border: medium dotted blue;
+}
+
+.codecheck_tracer .hc-button.hc-step:focus {
+  border: medium dotted yellow;
+}
+
+/* Buttons */
+
+.codecheck_tracer .buttons {
+  width: max-content;
+  padding: 1em;
+  background: #F3F3F4;
+}
+
+
+/* Good/bad */
+
+.hc-button.hc-step.hc-bad {
+  background-color: #F4D3DD;
+}
+
+.hc-button.hc-step.hc-good {
+  background-color: #A3F187;
+}
+
+.codecheck_tracer .value > span.hc-bad {
+  background-color: #B4939D;
+}
+
+.codecheck_tracer .value > span.hc-good {
+  background-color: #63B147;
+}
+
+
+.terminal {
+  min-width: 20em;
+  min-height: 10em;
+  padding: 1em;
+  border: thin solid black;
+  border-radius: 1em;
+}
+
+.terminal .input {
+  font-weight: bold;
+}

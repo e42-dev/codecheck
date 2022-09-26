@@ -34,7 +34,7 @@ the visual of another path
 
 */
 
-import { horstmann_common, _ } from './horstmann_common.mjs'
+import { horstmann_common, _ } from './e42_common.mjs'
 
 const setup = []
 

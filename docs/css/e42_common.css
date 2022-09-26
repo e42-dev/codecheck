@@ -1,0 +1,403 @@
+@charset "utf-8";
+
+/* 
+
+Styling rules
+
+An interactive element is always inside an element with class 
+hc-included. The element itself has class hc-element and one of 
+the classes horstmann_algosim, horstmann_codecheck, horstmann_ma, 
+multiple-choice [sic], horstmann_objectdiagram, and so on. 
+
+Code and handwriting fonts in the elements are achieved with 
+the .hc-code and .hc-hand mixins. These are marked !important 
+so that they override any others. Description authors should not
+use these but stick with code, pre, and .pseudo.
+
+Let's keep the common rules simple and easy to override. (In CSS,
+a longer sequence of class, pseudo-class and attribute selectors
+wins over a shorter sequence; see https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity) 
+
+*/
+
+/* Fonts */
+
+/*
+  x-height from FontForge
+  STIXTwoText: 472/1000
+  Kalam: 512/1000
+  Deja Vu Sans/Deja Vu Sans Mono: 1118/2048
+*/
+
+.hc-included, .hc-comment {
+    font-family: "STIXTwoText", "Times New Roman", serif;
+}
+
+.hc-included .hc-code, .hc-included pre, .hc-included code {
+    font-family:"DejaVuSansMonoSemiCondensed", "Courier New", monospace;
+    font-size: 86.46297%; /* (472/1000) / (1118/2048) */
+    word-wrap: break-word; 
+}
+
+.hc-included .hc-hand, .hc-included .pseudo {
+    font-family:"Kalam", "Comic Sans MS", cursive;
+    font-size: 92.1875%; /* (472/1000) / (512/1000) */
+    letter-spacing: -0.05em;
+}
+
+/*
+.hc-included li .hc-hand, .hc-included p .hc-hand,.hc-included li .pseudo {
+    font-family:"Kalam", "Comic Sans MS", cursive;
+    font-size: 105%;
+    letter-spacing: -0.05em;
+}
+*/
+
+.hc-included pre .hc-comment, .hc-included code .hc-comment, .hc-included .hc-code .hc-comment {
+    font-size: 115.65645%; /* (1118/2048) / (472/1000) */
+}
+
+.hc-included pre.hc-hand, .hc-included pre .hc-hand, .hc-included pre.pseudo, .hc-included pre .pseudo {
+    font-size: 106.62079%; /* (1118/2048) / (512/1000) */
+}
+
+.hc-included th {
+    font-family:"DejaVuSans", "Arial", sans-serif;    
+    font-weight: bold;
+}
+
+.hc-included th.code, .hc-included th code, .hc-button code, .hc-message code  {
+    font-size: 100%; /* To match DejaVuSans instead of STIX */
+}
+
+.hc-included th.hc-hand, .hc-included th .hc-hand, .hc-included th .pseudo {
+    font-size: 106.62079%; /* (1118 / 2048) / (512 / 1000), to match DejaVuSans instead of STIX */
+}
+
+.hc-included th, .hc-included td { /* for tables in the description */
+    background: #F3F3F4;
+    padding: 0.2em 0.4em 0.2em 0.4em;
+}
+
+.hc-circled {
+    font-family:"DejaVuSansMonoSemiCondensed", "Courier New", monospace;
+    font-weight: bold;
+    background: #0054a8;
+    border-radius: 1em;
+    width: 1.2em;
+    color: white;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    padding: 0.3em;
+    margin: 0 0.1em 0 0.1em;
+}
+
+.hc-circled.hc-selected {
+    background: white;
+    border-color: #0054a8;
+    color: #0054a8;
+    border: solid .2em;
+}
+
+.hc-message, .hc-button {
+    font-family:"DejaVuSans", "Arial", sans-serif;  
+}
+
+/* Colors and backgrounds */
+
+/* blue */
+
+.hc-included pre strong, .hc-included pre b, .hc-message, .hc-message.hc-step {
+    color: #0054a8;
+}
+
+.hc-button.hc-step {
+    background: #0054a8;
+}
+
+/* orange */
+
+.hc-message.hc-retry {
+    color: #E19042;
+    margin-bottom: .5em;
+}
+
+.hc-button.hc-retry {
+    background: #E19042;
+}
+
+/* green */
+
+.hc-button.hc-start, .hc-step.hc-reset {
+    background: #005a70;
+}
+
+/* light green */
+
+.hc-message.hc-good {
+    color: #63B147;
+}
+
+/* gray */
+
+.hc-instructions {
+  background: #F3F3F4;
+}
+
+/*------------------------------------------------------------------*/
+
+.hc-message .hc-circled-number {
+    font-size: 1.75em;
+    vertical-align: middle;
+}
+
+/* This is for styling the p, pre, code, etc. in an included item */
+
+.hc-included p {
+    line-height:1.143; 
+    margin-bottom:1em;
+    margin-left:0;
+    margin-right:1em;
+    margin-top:1em;
+    text-align:left;
+    text-indent:0;
+}
+
+.hc-included li {
+    line-height: 1.143;
+    margin-bottom: 0.2em;
+    margin-top: 0.2em;
+}
+
+.hc-included pre {
+    line-height: 1.25;
+}
+
+.hc-included code {
+    white-space: pre-wrap;
+}
+
+/*------------------------------------------------------------------*/
+
+/* All styling that is common to multiple elements goes here */
+
+/*------------------------------------------------------------------*/
+
+/* Shape for all buttons */
+
+.hc-button {
+    font-weight: bold;
+    color: #FFFFFF;
+    cursor: pointer;
+    padding: 0.2em .56em;
+    border-radius: 0.56em;
+    position: relative;
+    font-size: 75%;
+    margin-left: 0.2em;
+    margin-right: 0.2em;
+    user-select: none;
+}
+
+.hc-button.hc-start {
+    margin-left:1.25em;
+}
+
+.hc-step.hc-reset {
+    margin-left:6em;
+}
+
+.hc-goodjob::after {
+    content: "✓";
+    color: #427b2d;
+    font-size: 3em;
+    font-weight: bold
+}
+
+/* Button states */
+
+.hc-button:focus {
+    border: solid 0.2em #c0c0c0;
+    border-radius: 0.56em;
+}
+
+.hc-button.hc-disabled {
+    background: #707070;
+    pointer-events: none; 
+}
+
+/* Font for all messages */
+
+.hc-message {
+    font-weight: bold;
+    font-size:80%;
+    margin-top: 1em;
+}
+
+.hc-message2 {
+    font-size: 0.6em;
+}
+
+/* Bottom panel */
+
+.hc-bottom {
+    text-align: center;
+    clear: both;
+    user-select: none;
+}
+
+.hc-bottom .hc-message {
+    text-align: left;
+    margin-bottom: 1.5em;
+}
+
+/* Instruction pane */
+
+.hc-instructions {
+    line-height: 1.1em;
+    margin: 1em 1em 1em 0;
+    padding: 0.5em 1em;
+    min-height: 5em; /* to prevent resizing */
+    user-select: none;
+    width: max-content;
+}
+
+.hc-bottom .hc-debug {
+    text-align: right;
+    font-size: 0.5em;
+}
+
+/* Input field */
+
+.hc-element > div:nth-child(2) {
+    position: relative;
+}
+
+.hc-element > div:nth-child(2) > input {
+    z-index: 100;
+    text-align: center;
+    border: solid black thin;
+    position: absolute;
+}
+
+.hc-element > div:nth-child(2) > input.hc-bad {
+    background-color: #F4D3DD;
+}
+
+/*------------------------------------------------------------------*/
+
+/* Zoom button for enlarging images */
+
+.hc-zoombutton {
+    margin-left: 0.2em;
+}
+
+/*------------------------------------------------------------------*/
+
+
+body {
+    /* overflow-y: hidden; */ /* TODO: This takes care of a double scroll bar in qref, but why doesn't it have other adverse effects? */
+    /* Removed */
+}
+
+.hc-qref {
+    z-index: 100;
+    width: 40%;
+    height: 80%;
+    overflow: hidden;
+    position: fixed; /* so that it stays when scrolled, https://stackoverflow.com/questions/19064987/html-css-popup-div-on-text-click */
+    box-shadow: .5em .5em .5em #ddd;    
+    background-color: #F3F0DD;
+    display: flex;
+    flex-direction: column;
+    padding: 0.3em;
+    left: 55vw;
+    top: 10vh;
+}
+
+.hc-qref > div:nth-child(1) {
+    position: relative;
+    padding: 0.3em;
+    width: 100%;
+}
+
+.hc-qref > div:nth-child(2) {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+
+.hc-qref > div > iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    overflow: hidden;
+}
+
+.hc-glossary {
+    color: black;
+    z-index: 100;
+    background-size: auto 85%;
+    box-shadow: .5em .5em .5em #ddd;
+    padding: 0.3em; 
+    height: auto; 
+    width: 20em;
+    overflow: hidden;
+    background-color: #F3F0DD;
+    display: inline;
+    position: absolute;
+    font-family:"DejaVuSans", "Arial", sans-serif;
+    font-size: .75em;
+}
+
+.hc-glossary code {
+    font-family:"DejaVuSansMonoSemiCondensed", "Courier New", monospace;
+    font-size: 100%;
+}
+
+.hc-glossary > div {
+    text-align: left;
+    padding: 0.8em;
+    display: inline-block;
+}
+
+.hc-glossary > div > p:first-child {
+    font-weight: bold;
+    margin-bottom: 1em;
+}
+
+/* iPad scrolling-to-top madness
+
+https://discussions.apple.com/thread/7208426
+https://github.com/fancyapps/fancyBox/issues/2#issuecomment-5997068
+https://stackoverflow.com/questions/34766636/ios-browser-iframe-jumps-to-top-when-changing-css-or-content-using-javascript
+
+https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariCSSRef/Articles/StandardCSSProperties.html
+
+
+
+*/
+
+/* Some of this pixie dust is necessary to prevent Safari from
+jumping. This is still a problem when clicking on a link 
+referencing another section that makes a popup. 2019-12-16 */
+
+html, body {
+    height: 100%;
+    padding-bottom: 1px;
+}
+
+body > div {
+    width: 100%;
+    height: 100%;
+    padding-bottom: 1px;
+    position: relative;
+    /* overflow: auto; */ /* This was to make the iPad not jump but it interfered with accessibility */
+}
+
+.interactivities {
+    -webkit-overflow-scrolling: touch;
+    -webkit-touch-callout: none; 
+    overflow-x: scroll; /* Enable horizontal swiping on iOS 2019-12-16 */
+}
